@@ -1,0 +1,25 @@
+/* .description-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 35px;
+    background-color: #FFA93B;
+    align-items: center;
+    border-top: 1px solid #434343; */
+/* } */
+
+.description-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 35px;
+    background-color: #FFA93B;
+    align-items: center;
+    /* border-top: 1px solid #434343; */
+}
+
+
+
+.description-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
