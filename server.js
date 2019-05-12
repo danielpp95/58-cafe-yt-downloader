@@ -44,7 +44,7 @@ app.get('/download', async (req, res) => {
 
     res.setHeader('Content-disposition', 'attachment; filename=' + sanitize(title) + '.mp4');
 
-    res.send(ytdl(url))
+    ytdl(url).pipe(res)
 })
 
 app.listen(4000, () => {
