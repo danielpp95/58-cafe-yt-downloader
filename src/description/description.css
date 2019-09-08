@@ -16,10 +16,55 @@
     /* border-top: 1px solid #434343; */
 }
 
-
-
 .description-btns {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+}
+
+.description-select {
+    display: flex;
+    justify-content: center;
+}
+
+.description-select select{
+    background-color: rgb(67, 67, 67);
+    color: white;
+    padding: 12px;
+    width: 150px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: butt;
+    outline: none;
+    border-radius: 4px 0 0px 4px;
+}
+
+.description-select::after {
+    content: "▼";
+    width: 35px;
+    height: 100%;
+    text-align: center;
+    font-size: 16px;
+    line-height: 45px;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: #434343;
+    pointer-events: none;
+    padding: 2px;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+.description-select:hover::after {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(67, 67, 67, 0.6);
+}
+
+.description-select select:hover{
+    cursor: pointer;
+}
+
+.description-select select option {
+    padding: 30px;
 }

@@ -21,7 +21,7 @@
     "react-dom": "^16.8.6",
     "react-engine": "^4.5.1",
     "sanitize-filename": "^1.6.1",
-    "ytdl-core": "^0.29.1"
+    "ytdl-core": "^0.29.6"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

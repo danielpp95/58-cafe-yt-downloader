@@ -17,14 +17,25 @@ export default class Description extends Component {
                         <p>title: {this.props.title}</p>
                         <p>duration: {this.props.duration}</p>
                     </div>
-                        
 
                 </div>
-                    <div className='description-btns'>
-                        <button className='btn btn-danger' onClick={this.props.handleHideDescription} >Cancel</button>
+                <div className="description-select">
+                    <select
+                        onChange={this.props.handleSelectFormat}
+                        defaultValue="mp4" >
+                        <option value=".mp4">.MP4</option>
+                        <option value=".mp3">.MP3</option>
+                    </select>
+                </div>
 
-                        <button className='btn btn-primary' onClick={this.props.handleDownladVideo} >Download</button>
-                    </div>
+                <br/>
+                <br/>
+                
+                <div className='description-btns'>
+                    <button className='btn btn-danger' onClick={this.props.handleHideDescription} >Cancel</button>
+
+                    <button className='btn btn-primary' onClick={this.props.handleDownladVideo} >Download</button>
+                </div>
             </div>
         )
     }

@@ -21,7 +21,8 @@ export default class HomePage extends Component {
         file: '',
         isLoading: false,
         error: false,
-        errorMessage: ''
+        errorMessage: '',
+        format: '.mp4',
     };
 
     handleChangeUrl = (sender) => {
@@ -34,6 +35,10 @@ export default class HomePage extends Component {
             this.handleSearchVideo()
         }
     }
+
+    handleGetParameters = sender => {
+        return `FORMAT=${this.state.format}&URL=${this.state.url}`
+    }
     
     handleSearchVideo =  (sender) => {
         this.setState({isLoading: true, error: false})
@@ -43,16 +48,18 @@ export default class HomePage extends Component {
         const validation = /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/(watch?v=)?.+$/.test(url);
 
         if (validation) {
-            fetch(`/info?URL=${this.state.url}`)
+            fetch(`/info?${this.handleGetParameters()}`)
             .then(response => response.json())
-            .then(data => this.setState({
-                showDescription: true,
-                title: data.title,
-                duration: data.player_response.videoDetails.lengthSeconds,
-                img: data.thumbnail_url,
-                isLoading: false,
-                error: false
-            }))
+            .then(data => {
+                this.setState({
+                    showDescription: true,
+                    title: data.title,
+                    duration: data.player_response.videoDetails.lengthSeconds,
+                    img: data.author.avatar,//thumbnail_url,
+                    isLoading: false,
+                    error: false
+                })
+            })
             .catch(err => {
                 console.log(err)
                 this.setState({isLoading: false, error: true})
@@ -74,7 +81,12 @@ export default class HomePage extends Component {
     }
 
     handleDownladVideo = sender => {
-        window.location.href = `/download?URL=${this.state.url}`;
+        window.location.href = `/download?${this.handleGetParameters()}`;
+    }
+
+    handleSelectFormat = sender => {
+        var format = sender.target.value
+        this.setState({format})
     }
 
     render(){
@@ -98,6 +110,7 @@ export default class HomePage extends Component {
                         handleHideDescription={this.handleHideDescription}
                         handleDownladVideo={this.handleDownladVideo}
                         isLoading={this.state.isLoading}
+                        handleSelectFormat={this.handleSelectFormat}
                     /> 
                 }
             </div>

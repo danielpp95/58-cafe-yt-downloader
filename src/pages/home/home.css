@@ -6,7 +6,10 @@
     color: #000;
     font-size: 18px;
     padding: 10px 15px;
+}
 
+.btn:hover{
+    cursor: pointer;
 }
 
 .btn-success{

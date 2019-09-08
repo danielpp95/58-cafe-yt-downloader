@@ -36,15 +36,28 @@ res.send('None shall pass');
 
 app.get('/download', async (req, res) => {
     var url = req.query.URL;
+    var format = req.query.FORMAT;
 
     var info = await ytdl.getBasicInfo(url)
     var title = info.player_response.videoDetails.title
     // sanitize emoji
     title = title.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '')
 
-    res.setHeader('Content-disposition', 'attachment; filename=' + sanitize(title) + '.mp4');
+    res.setHeader('Content-disposition', 'attachment; filename=' + sanitize(title) + format);
 
-    ytdl(url).pipe(res)
+    if (format === '.mp3') {
+        var info = await ytdl.getBasicInfo(url)
+        info.formats.forEach(format => {
+            if (format.audio_channels) {
+                if (format.type.includes('audio/mp4')) {
+                    ytdl(url, {format: format}).pipe(res)
+                   
+                }
+            }
+        });
+    }else{
+        ytdl(url).pipe(res)
+    }
 })
 
 app.listen(4000, () => {
